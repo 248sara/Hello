@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Car Shop</title>
+        
+    </h:head>
+    <h:body>
+        <f:view>
+            <h:form>
+                <h:panelGrid columns="2" >
+                    
+                    <h:outputText value="Enter Your Name:"/>
+                    <h:inputText value="#{example.name}"/> 
+                    
+                   
+                    <h:outputText value="Enter Your Email:"/>
+                    <h:inputText value="#{example.email}"/>
+                    
+                    <h:outputText value="select your favourite color:"/>
+                    <h:selectOneRadio value="#{example.color}">
+                        <f:selectItems value="#{example.listColor}" />
+                    </h:selectOneRadio>
+                     
+                    <h:outputText value="Engine Fuel: Benzine "/>
+                    <h:selectBooleanCheckbox value="#{example.checkFuel}">
+                       <f:ajax event="change" render="menu" execute="@this" />
+                    </h:selectBooleanCheckbox>
+                    
+                    <h:outputText value="Select Your Car Model"/>
+                    <h:selectOneMenu value="#{example.modelNumber}" >
+                         <f:selectItems value="#{example.listModels}" var="y" itemValue="#{y.value}" itemLabel="#{y.label}"/>
+                    </h:selectOneMenu>
+                    
+                    <h:panelGroup   id ="menu" >
+                    <h:outputText value="Engine Size:"  rendered="#{example.checkFuel }"   />
+                    <h:selectOneMenu value="#{example.size}" rendered="#{example.checkFuel }"    >
+                                     <f:selectItems value="#{example.listEngine}" var="S" itemValue="#{S.value}" itemLabel="#{S.label}" />
+                    </h:selectOneMenu>
+                    </h:panelGroup>
+                    
+               </h:panelGrid>
+                <h:commandButton value="Buy" action="Action" />
+                <h:commandButton value="Table" action="data" />
+            </h:form>
+        </f:view>
+    </h:body>
+</html>
+
